@@ -1,0 +1,9 @@
+markdownify
+trafilatura
+pandas
+beautifulsoup4
+agentops
+fastapi
+uvicorn
+requests
+pydantic-settings

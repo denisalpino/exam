@@ -1,0 +1,581 @@
+## Блок 1. Модули (дисциплины)
+### Индивидуальная профессиональная подготовка (по профессиональным областям, по 
+профессиональным ролям, по уровню сложности и др.)
+### Обязательные дисциплины. 1 семестр
+1. Продуктовые исследования
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+2. Воркшоп по созданию продукта на данных / Data Product Development Workshop
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+### Пул выборных дисциплин. 1 семестр
+1. Процессы и методологии разработки решений на основе ИИ
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+2. Монетизация ИИ-продуктов
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+3. Стратегический продуктовый менеджмент
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+4. Продуктовый дизайн и прототипирование AI-решений
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+5. Математика для машинного обучения и анализа данных
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+6. Математическая статистика
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+7. Основы программирования на Python
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+8. Основы машинного обучения
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+9. Основы глубокого обучения
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+10. Введение в большие языковые модели (LLM)
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+11. Прикладной анализ временных рядов
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+12. Инженерные практики в ML и анализе данных
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 1
+
+13. Прикладные инструменты разработки
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 1
+
+14. Разработка веб-приложений (Python Backend)
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 1
+
+15. Проектирование микросервисов
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 1
+
+### Пул выборных дисциплин. 2 семестр
+1. Бизнес-анализ
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+2. Практики менторства и развития в Data Science
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+3. Управление проектами в Data Science
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+4. Метрики и аналитика продукта
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+5. Управление продуктовым портфелем
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+6. Основы маркетинга для ИИ-продуктов
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+7. Управление командами и проектами в ИИ
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+8. Фандрайзинг и бизнес-планирование
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+9. Инженерия данных
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+10. Программирование на Python (продвинутый уровень)
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+11. Прикладные задачи машинного обучения
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+12. Данные в финансовом секторе
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+13. Финансовые технологии
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+14. Глубокое обучение на практике
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 2
+
+15. Проектирование систем машинного обучения (ML System Design)
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 2
+
+### Прикладные задачи машинного обучения. 2 семестр
+1. Обработка естественного языка
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 2
+
+2. Интеллектуальные агенты и большие языковые модели
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 2
+
+3. Воркшоп по прикладному использованию языковых и генеративных моделей
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 2
+
+4. Основы построения рекомендательных систем
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 2
+
+5. Технологии компьютерного зрения
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 2
+
+### Пул выборных дисциплин. 3 семестр
+1. Процессы и методологии разработки решений на основе ИИ
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+2. Продуктовый дизайн и прототипирование AI-решений
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+3. Стратегический продуктовый менеджмент
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+4. Монетизация ИИ-продуктов
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+5. Математика для машинного обучения и анализа данных
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+6. Математическая статистика
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+7. Основы машинного обучения
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+8. Основы глубокого обучения
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+9. Введение в большие языковые модели (LLM)
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+10. Прикладной анализ временных рядов
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+11. Инженерные практики в ML и анализе данных
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 3
+
+12. Прикладные инструменты разработки
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 3
+
+13. Разработка веб-приложений (Python Backend)
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 3
+
+14. Проектирование микросервисов
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 3
+
+### Пул выборных дисциплин. 4 семестр
+1. Бизнес-анализ
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 4
+
+2. Практики менторства и развития в Data Science
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 4
+
+3. Управление проектами в Data Science
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 4
+
+4. Метрики и аналитика продукта
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 4
+
+5. Управление продуктовым портфелем
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 4
+
+6. Основы маркетинга для ИИ-продуктов
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 4
+
+7. Управление командами и проектами в ИИ
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 4
+
+8. Правовые аспекты разработки и использования ИИ
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 4
+
+9. Фандрайзинг и бизнес-планирование
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 4
+
+### Универсальная (надпрофессиональная) подготовка
+### Микромодули Soft Skills (1-3 семестры)
+1. Элективные микромодули Soft Skills
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1, 2, 3
+
+### Мировоззренческий модуль ии
+### Креативные технологии
+1. Основы концептуального мышления / Introduction to Conceptual Thinking
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+2. Основы концептуального мышления
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+### Предпринимательская культура
+1. Стартап-трек: от mvp до бизнеса
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+2. Создание и развитие технологического бизнеса
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+### Мышление
+1. Этика в сфере информационных технологий и искусственного интеллекта
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+2. Критическое мышление (продвинутый уровень)
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+3. Навыки критического мышления (продвинутый уровень) / Critical Thinking Skills (advanced)
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 3
+
+### Иностранный язык (маг 2025/2026) ИИ
+### Иностранный язык (маг 2025/2026). 2 семестр
+1. Английский язык в профессиональной деятельности / English for specific purposes
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+2. Русский язык как иностранный / Russian as a foreign language
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+3. Английский язык A2 / English A2
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+4. Английский язык A1 / English A1
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 2
+
+### Иностранный язык (маг 2025/2026). 1 семестр
+1. Английский язык в профессиональной деятельности / English for specific purposes
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+2. Русский язык как иностранный / Russian as a foreign language
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+3. Английский язык A2 / English A2
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+4. Английский язык A1 / English A1
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+## Блок 2. Практика
+### Практика
+### Преддипломная практика
+1. Производственная, преддипломная практика
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 4
+
+### Производственная практика
+1. Производственная, технологическая (проектно-технологическая) практика
+- Credits awarded for disciplines: 9
+- Total class hours: 324
+- Available in semesters: 1
+
+2. Производственная, технологическая (проектно-технологическая) практика
+- Credits awarded for disciplines: 9
+- Total class hours: 324
+- Available in semesters: 2
+
+3. Производственная, технологическая (проектно-технологическая) практика
+- Credits awarded for disciplines: 9
+- Total class hours: 324
+- Available in semesters: 3
+
+4. Производственная, технологическая (проектно-технологическая) практика
+- Credits awarded for disciplines: 9
+- Total class hours: 324
+- Available in semesters: 4
+
+## Блок 3. ГИА
+### Государственная итоговая аттестация
+1. Подготовка к защите и защита ВКР
+- Credits awarded for disciplines: 6
+- Total class hours: 216
+- Available in semesters: 4
+
+## Блок 4. Факультативные модули (дисциплины)
+### Инклюзивный факультатив
+1. Регуляция эмоционального состояния в профессиональной деятельности
+- Credits awarded for disciplines: 3
+- Total class hours: 108
+- Available in semesters: 1
+
+### Элективные микромодули Soft Skills (1-3 семестры, онлайн)
+1. Управление мотивацией
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+2. Инструменты принятия решений / Art & math of decision making
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+3. Медиация и урегулирование разногласий / Mediation and dispute resolutio
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+4. Развитие карьеры в современной профессиональной среде
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+5. Выступления для молодых ученых
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+6. Самопрезентация и питчинг
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+7. Современное лидерство
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+8. Межкультурная коммуникация
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+9. Работа в удаленных командах
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+10. Публичные выступления в онлайн-формате
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+11. Техники ответов на вопросы в публичных выступлениях
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+12. Публичные выступления в профессиональной деятельности / Pitches and speeches
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+13. Доказательный подход к управлению карьерой / Evidence-based approach to career management
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+14. Планирование и изменение карьерной траектории / Launching and relaunching your career
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+15. Основы публичных выступлений
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+16. Сторителлинг
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+17. Стратегии эффективных переговоров с работодателем
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+18. Управление стрессом / Stress management
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+19. Практики совместной работы и принятия решений
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+20. Сложная коммуникация
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+21. Основы финансовой грамотности
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+22. Целеполагание в современном мире
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+23. Управление стрессом и профилактика выгорания
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+24. Тайм-менеджмент
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+25. Управление конфликтами
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+26. Современная бизнес-коммуникация
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+27. Карьера в IT
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
+
+28. Эмпатичная коммуникация / Empathetic communication
+- Credits awarded for disciplines: 1
+- Total class hours: 36
+- Available in semesters: 1, 2, 3
