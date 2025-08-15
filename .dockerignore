@@ -1,0 +1,40 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Кэш Python
+**/__pycache__/
+**/*.py[cod]
+**/*.pyo
+**/*.pyd
+
+# Docker
+docker-compose.yml
+Dockerfile
+.docker
+.dockerignore
+
+# CI / конфигурационные файлы
+.codeclimate.yml
+.travis.yml
+.taskcluster.yml
+
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+**/*.py[cod]
+
+# Логи и отчёты
+logs/
+*.log
+
+# Виртуальные окружения
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea
+
+qdrant_storage/

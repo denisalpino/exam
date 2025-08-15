@@ -1,0 +1,107 @@
+services:
+  ollama_embed:
+    build: ./ollama_embed
+    container_name: ollama_embed
+    env_file: .env
+    ports:
+      - "11435:11434"
+    environment:
+      - OLLAMA_HOST=ollama_embed:11435
+    volumes:
+      - ollama_embed_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: ["gpu"]
+    restart: unless-stopped
+    networks:
+      - backend
+  ollama_gen:
+    build: ./ollama_gen
+    container_name: ollama_gen
+    env_file: .env
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_HOST=ollama_gen:11434
+      - OLLAMA_KV_CACHE_TYPE=q4_0
+      - OLLAMA_FLASH_ATTENTION=1
+      - OLLAMA_NUM_PARALLEL=2
+      - OLLAMA_MAX_LOADED_MODELS=1
+      - OLLAMA_CUDA=1
+      - OLLAMA_NUM_THREADS=6
+      - OLLAMA_DEBUG=1
+      - OLLAMA_BATCH_SIZE=128
+      - OLLAMA_NUM_GPU_LAYERS=30
+    volumes:
+      - ollama_gen_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: ["gpu"]
+    restart: unless-stopped
+    networks:
+      - backend
+  rag:
+    build:
+      context: .
+      dockerfile: rag/Dockerfile
+    container_name: rag
+    env_file: .env
+    ports:
+      - "8000:8000"
+    environment:
+      - TELEGRAM_TOKEN
+      - RAG_CREWAI_URL
+      - OLLAMA_EMBEDDING_URL
+      - OLLAMA_LLM_URL
+      - LLM_MODEL
+      - EMBEDDING_MODEL
+      - DATA_DIR
+    depends_on:
+      - ollama_embed
+      - ollama_gen
+    volumes:
+      - ./data:/app/data
+      - ./common:/app/common
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - backend
+  telegram_bot:
+    build:
+      context: .
+      dockerfile: telegram_bot/Dockerfile
+    container_name: telegram_bot
+    env_file: .env
+    environment:
+      - TELEGRAM_TOKEN
+      - RAG_CREWAI_URL
+      - OLLAMA_EMBEDDING_URL
+      - OLLAMA_LLM_URL
+      - LLM_MODEL
+      - EMBEDDING_MODEL
+      - DATA_DIR
+    depends_on:
+      - rag
+    volumes:
+      - ./common:/app/common
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  ollama_embed_data:
+  ollama_gen_data:
