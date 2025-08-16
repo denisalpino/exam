@@ -135,9 +135,9 @@ def dct2txt(dct: Dict) -> str:
             for ind, row in disciplines.iterrows():
                 program.append(
                     f"{ind + 1}. {row['title']}\n"
-                    f"- Credits awarded for disciplines: {row['credits']}\n"
-                    f"- Total class hours: {row['hours']}\n"
-                    F"- Available in semesters: {', '.join(map(str, row['semester_list']))}\n"
+                    f"- Количество кредитов, начисляемых за дисциплину: {row['credits']}\n"
+                    f"- Сумма учебных часов: {row['hours']}\n"
+                    F"- Номера семестров: {', '.join(map(str, row['semester_list']))}\n"
                 )
     program = "\n".join(program)
 
