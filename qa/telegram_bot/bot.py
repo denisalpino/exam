@@ -51,7 +51,7 @@ async def handle_message(message: Message):
     try:
         response = requests.post(
             settings.RAG_CREWAI_URL,
-            json={"message": message.text},
+            json={"message": message.text, "user_id": str(message.from_user.id)}, # type: ignore
             timeout=600
         )
 
