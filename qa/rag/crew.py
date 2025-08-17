@@ -2,7 +2,7 @@ import os
 from typing import Literal, Type
 
 from pydantic import BaseModel, Field
-from crewai.tools import BaseTool, tool
+from crewai.tools import BaseTool
 from crewai import Agent, Task, Crew, Process, LLM
 import agentops
 
@@ -12,34 +12,42 @@ from rag_app import app as rag_app
 agentops.init(api_key=settings.AGENTOPS_TOKEN, default_tags=["crewai"])
 
 
-PROGRAM_NAMES = ["Искуственный интеллект", "Управление ИИ-продуктами / AI Product"]
+PROGRAM_NAMES = ["Искусственный интеллект", "Управление ИИ-продуктами / AI Product"]
 
 # Инструмент 1: Запрос к базе знаний
 class ProgramInput(BaseModel):
-    query:   str  = Field(..., description="Запрос о программе, в целом, ИЛИ ее дисциплинах и учебном плане")
+    query:   str = Field(..., description="Запрос о программе, в целом, ИЛИ ее дисциплинах и учебном плане")
     program: str = Field(..., description=f"Название одной из программ, к которой относится запрос: {' или '.join(PROGRAM_NAMES)}")
+
 
 class ProgramTool(BaseTool):
     name: str = "ask_about_program"
     description: str = "Используется для фактологических вопросов о конкретной программе"
     args_schema: Type[BaseModel] = ProgramInput
 
-    def _run(self, query: str, program: Literal["Искуственный интеллект", "Управление ИИ-продуктами / AI Product"]) -> str:
+    def _run(self, query: str, program: str) -> str:
         if program not in PROGRAM_NAMES:
             return (
                 "Введено неправильное название программы. "
                 f"Доступны только следующие: {', '.join(PROGRAM_NAMES)}"
             )
-        # If the program name is incorrect, the agent will respond
-        # that it was unable to find such a program.
-        return rag_app.query(
+
+        _, cits = rag_app.query(
             input_query=query,
-            where={"$and": [dict(program=program)]}
-        ) # type: ignore
+            where={"$and": [dict(program=program), dict(plan=False)]},
+            citations=True
+        )
+        print(_)
+        print(cits)
+        answer = ["Relevant content found:"]
+        for i, item in enumerate(cits):
+            answer.append(f'{i}. {item[0]}')
+        return "\n".join(answer)
 
 # Инструмент 2: Рекомендация курсов
 class FetchProgramPlanInput(BaseModel):
     program: str = Field(..., description=f"Название одной из программ, к которой относится запрос: {', '.join(PROGRAM_NAMES)}")
+
 
 class FetchProgramPlanTool(BaseTool):
     name: str = "fetch_full_program_plan"
@@ -48,7 +56,7 @@ class FetchProgramPlanTool(BaseTool):
 
     def _run(self, program: str) -> str:
         inversive_mapping = {
-            "Искуственный интеллект": "ai",
+            "Искусственный интеллект": "ai",
             "Управление ИИ-продуктами / AI Product": "ai_product"
         }
 
@@ -64,8 +72,9 @@ class FetchProgramPlanTool(BaseTool):
         # Try to find and return file content
         fname = f'{program_name}_program.txt'
         file_path = os.path.join(settings.DATA_DIR, fname)
-        if os.path.exists(file_path) :
-            with open(file_path, encoding="utf-8") as f: content = f.read()
+        if os.path.exists(file_path):
+            with open(file_path, encoding="utf-8") as f:
+                content = f.read()
             return f"Вот, полный учебный план программы {program}:\n\n{content}"
         return (
             f"Не смог найти нужного файла с учебным планом программы {program}. "
@@ -74,154 +83,120 @@ class FetchProgramPlanTool(BaseTool):
 
 
 # Создаем экземпляры инструментов
-program_tool            = ProgramTool()
+program_tool = ProgramTool()
 fetch_program_plan_tool = FetchProgramPlanTool()
 
-def create_agent(
-    role: str, goal: str, backstory: str,
-    tools: list,
-    max_tokens: int = 1000,
-    allow_delegation: bool = False,
-    num_ctx: int = 4000,
-    temperature: float = 0.3
-) -> Agent:
-    return Agent(
-        role=role,
-        goal=goal,
-        backstory=backstory,
+
+async def run_crew(user_input: str):
+    # Агент 1: Менеджер программ
+    manager = Agent(
+        role="Менеджер программ ИМТО",
+        goal="Используя предоставленную помощниками информацию, способствующую удовлетворению пользоваетльского запроса, сформировать структурированный и компактый окончательный ответ пользователю, удалив все Markdown форматирование и добавив смайлики",
+        backstory=f"Как дружелюбный и ответственный менеджер университета ИТМО, ты ведешь разговор с абитуриентом только о следующих магистрских программах: {' и '.join(PROGRAM_NAMES)}. Если абитуриент спрашивает об отдаленных от программ тем, корректно сообщи о своем предназначении",
         llm=LLM(
             model=f"ollama/{settings.LLM_MODEL}",
             base_url=settings.OLLAMA_LLM_URL,
-            max_completion_tokens=max_tokens,
-            presence_penalty=-2,
-            temperature=temperature,
-            num_ctx=num_ctx,
+            temperature=0.2,
+            timeout=600,
             top_p=0.95,
             top_k=20,
-            seed=42
+            seed=42,
+            presence_penalty=-2
         ),
-        tools=tools,
+        tools=[],
         verbose=True,
-        allow_delegation=allow_delegation
+        allow_delegation=False
     )
 
+    # Агент 2: Аналитик программ
+    program_analyst = Agent(
+        role="Аналитик магистерских программ",
+        goal="Используя испключительно информацию о магистрских программах ИТМО сформировать компактный и персонализированный ответ",
+        backstory=f"Ты эксперт по академическим программам и умеешь при помощи инструментов итеративно извлекать точную информацию о программах. В твоем распоряжении лишь 2 программы {' и '.join(PROGRAM_NAMES)}",
+        llm=LLM(
+            model=f"ollama/{settings.LLM_MODEL}",
+            base_url=settings.OLLAMA_LLM_URL,
+            temperature=0.5,
+            timeout=600,
+            top_p=0.95,
+            top_k=20,
+            seed=42,
+            presence_penalty=-2
+        ),
+        tools=[program_tool],
+        verbose=True,
+        allow_delegation=True
+    )
 
-# Агент 1: Менеджер программы (старший агент, управляет остальными)
-program_manager = create_agent(
-    role="Менеджер образовательных программ в университете ИТМО",
-    goal=(
-        "Проконсультировать абитуриента о различных аспектах образовательных программ, "
-        "университете ИТМО, в целом, и поддерживать с ним диалог, координируя действия команды помощников"
-    ),
-    backstory=(
-        f"Как ответственный менеджер магистрских программ {', '.join(PROGRAM_NAMES)}, "
-        "ты предпочитаешь вести диалог с абитуриентом, исключительно об университете ИТМО "
-        "и аспектах связанных с перечисленными программами, так как только они находятся "
-        "в зоне твоей ответственности."
-    ),
-    tools=[],
-    max_tokens=4_000,
-    allow_delegation=True,
-    num_ctx=10_000,
-)
-# Агент 2: Интервьюер
-interviewer = create_agent(
-    role="Интервьюер абитуриентов",
-    goal="Создавать и наполнять профиль абитуриента, включающую информацию о бэкграунде, целях, навыках и амбициях",
-    backstory=(
-        "Как дружелюбный консультант по образованию в университете ИТМО ты умеешь"
-        "ненавязчиво и уместно интересоваться пользователем и его жизнью"
-    ),
-    tools=[],
-    max_tokens=400
-)
-# Агент 3: Аналитик программ
-program_analyst = create_agent(
-    role="Аналитик образовательных программ",
-    goal=(
-        "Предоставить полную запрашиваемую информацию об одной или нескольких магистрских "
-        "программ в ИТМО или провести анализ между несколькими програмами."
-    ),
-    backstory=(
-        f"Как опытный аналитик магистрских двух разных программ {', '.join(PROGRAM_NAMES)}, "
-        "ты можешь активно и неоднакартно пользоваться инструментов `ask_about_program`, "
-        "который предназначен для уточнения деталей об одной из несскольких программ.\n"
-        "ВСЕГДА пользуйся только той информацией, которую тебе предоставил инстрмент, "
-        "и НИКОГДА не додумывай."
-    ),
-    tools=[program_tool],
-    temperature=0.1,
-    max_tokens=4_000
-)
-# Агент 4: Советник по курсам
-course_advisor = create_agent(
-    role="Индивидуальный советник по курсам",
-    goal=(
-        "В зависимости от задачи:\n"
-        "    - либо составить подробный индивидуальный план обучения абитуриента, на основе его профиля\n"
-        "    - либо предложить наиболее подходящие дисциплины, учитывая вводные условия и критерии"
-    ),
-    backstory=(
-        "Как специалист по академическому планированию в университете ИТМО, ты умеешь выделять интересующие "
-        "абтуриента направления, соспоставлять их с его текущими знаниями, а затем предлагать "
-        "оптимальный индивидуально подобранный план дисциплин. Тебе ЗАПРЕЩЕНО выполнять задание "
-        "без использования учебного плана, полученного из `fetch_program_plan_tool`."
-    ),
-    tools=[fetch_program_plan_tool],
-    max_tokens=600,
-    temperature=0.1,
-    num_ctx=12_000
-)
+    # Агент 3: Советник по курсам
+    course_advisor = Agent(
+        role="Советник по учебному плану",
+        goal="Используя исключительно учебный план по интересуемой дисциплине сформировать компактный и персонализированный ответ",
+        backstory=f"Как опытный специалист по академическому планированию в университете ИТМО, ты умеешь четко выполнять поставленные задачи используя для их решения предпочтения абитуриента и инструмент, который предоставляет полнуое описание дисциплин, входящих в кокретную программу. В твоем распоряжении лишь 2 программы {' и '.join(PROGRAM_NAMES)}",
+        llm=LLM(
+            model=f"ollama/{settings.LLM_MODEL}",
+            base_url=settings.OLLAMA_LLM_URL,
+            temperature=0.5,
+            timeout=600,
+            top_p=0.95,
+            top_k=20,
+            seed=42,
+            presence_penalty=-2,
+            num_ctx=16_384
+        ),
+        tools=[fetch_program_plan_tool],
+        verbose=True,
+        allow_delegation=True
+    )
 
-manager_task = Task(
-    description="""{user_input}
+    main_task = Task(
+        description=(
+            "{user_input}\n\n"
+            "Оцени, относится ли последний пользовательский вопрос, к одной "
+            f"из магистрских программ университета ИТМО: {' или '.join(PROGRAM_NAMES)}!\n"
+            "- Если тема запроса далека от данных двух программ, сразу же корректно дай "
+            "понять пользователю, что ты Менеджер указанных выше магистрских программ "
+            "и готов общаться только о них.\n"
+            "- Если пользовательский запрос подразумевает интерес в указанных программах, выполни инстркции ниже\n\n"
+            "На основе предоставленного контекста взамодействия:\n"
+            "1. Выдели бэкграунд абитуриента, его цели и навыки\n"
+            "2. Идентифицировать ключевую задачу, которую пользователь поручил решить.\n"
+            "3. Решить задачу, делегируя подзадачи ответственным асистентам.\n"
+            "4. Оформить результаты в компактное и персонализированное сообщение\n\n"
+            "Правила управления:\n"
+            '- Если задача касается дисциплин, входящих в какую-либо программу, используй помощника "Советник по учебному плану"\n' \
+            '- Для получения любо другой информации о программах, используй "Аналитик магистерских программ"\n' \
+            '- А чтобы агрегировать информацию и сформировать окончательный ответ. используй "Менеджер программ ИМТО"'
+        ),
+        expected_output="Ответ должен иметь менее 300 слов. Ответ должен быть четко и красиво стркутурирован обычным текстом БЕЗ ИСПОЛЬЗОВАНИЯ Markdown синтаксиса, предпочитая использование смайликов"
+    )
 
-Инструкции:
-1. Проанализируй последний запрос пользователя в контексте предыдущего взаимодействия.
-2. Если запрос пользователя очень далек от темы образования и связанных процессов в университете ИТМО, корректно дай понять ему о своем предназначении.
-3. Пользуясь запросом и предыдущим контекстом выдели ключевую задачу которую предстоит решить.
-4. Декомпозируй задачу на очень конкретные полезные подзадачи.
-5. Делегируй решение каждой небольшой подзадачи своим помощником.
-6. Провалидируй, справились ли с ответом твои помощники и можешь ли ты исчерпывающе ответить на запрос пользователя. Если информации недостаточно, уточни их у помощников.
-7. Представь информацию компакто и полезно для абитуриента.
-
-В твоем распоряжении два помощника:
-- Аналитик образовательных программ: Фокусируется на общей информации о программах
-- Индивидуальный советник по курсам: Составляет индивидуальный план обучения по программе или же рекомендует конкретный дисциплины
-
-ОБЯЗАТЕЛЬНО пользуйся личной информацией об абитуриенте, его бэкграундом, целями, навыками
-ВСЕГДА пользуйся только той информацией, которую тебе предоставили помощьники, и НИКОГДА не додумывай.
-    """,
-    expected_output=(
-        "Профессиональный, доброжелательный и информативный ответ абитуриенту. "
-        "Ответ может варьроваться по размеру в зависимости от задачи, "
-        "однако если ответ велик, то стоит его четко и красиво стркутурировать.\n"
-        "ОТКАЖИСЬ от Markdown форматирования, предпочитая вместо него смайлики"
-    ),
-    agent=program_manager,
-    async_execution=False,
-    markdown=False
-    #context=[analysis_task, advising_task]  # Gets research output as context
-)
-
-# Создаем экипаж
-academic_crew = Crew(
-    agents=[program_analyst, course_advisor, program_manager], # interviewer
-    tasks=[manager_task],
-    manager_agent=program_manager,
-    process=Process.sequential,
-    verbose=True,
-    memory=True,
-    embedder={
-        "provider": "ollama",
-        "config": {
-            "model": settings.EMBEDDING_MODEL,
-            "vector_dimension": 1024,
-            "url": settings.OLLAMA_EMBEDDING_URL,
+    # Создаем экипаж
+    academic_crew = Crew(
+        agents=[manager, program_analyst, course_advisor], # type: ignore
+        tasks=[main_task],
+        process=Process.hierarchical,
+        manager_llm=LLM(
+            model=f"ollama/{settings.LLM_MODEL}",
+            base_url=settings.OLLAMA_LLM_URL,
+            temperature=0.5,
+            timeout=600,
+            top_p=0.95,
+            top_k=20,
+            seed=42,
+            presence_penalty=-2,
+            num_ctx=12_000
+        ),
+        verbose=True,
+        memory=True,
+        embedder={
+            "provider": "ollama",
+            "config": {
+                "model": settings.EMBEDDING_MODEL,
+                "vector_dimension": 1024,
+                "url": settings.OLLAMA_EMBEDDING_URL,
+            }
         }
-    }
-) # type: ignore
-
-async def run_crew(user_input: str):
+    )
     res = await academic_crew.kickoff_async(inputs={'user_input': user_input})
     return res.raw

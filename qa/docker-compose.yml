@@ -15,7 +15,7 @@ services:
           devices:
             - driver: nvidia
               count: all
-              capabilities: ["gpu"]
+              capabilities: ["gpu", "utility", "compute"]
     restart: unless-stopped
     networks:
       - backend
@@ -33,7 +33,6 @@ services:
       - OLLAMA_MAX_LOADED_MODELS=1
       - OLLAMA_CUDA=1
       - OLLAMA_NUM_THREADS=6
-      - OLLAMA_DEBUG=1
       - OLLAMA_BATCH_SIZE=128
       - OLLAMA_NUM_GPU_LAYERS=30
     volumes:
@@ -44,7 +43,7 @@ services:
           devices:
             - driver: nvidia
               count: all
-              capabilities: ["gpu"]
+              capabilities: ["gpu", "utility", "compute"]
     restart: unless-stopped
     networks:
       - backend

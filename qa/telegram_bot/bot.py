@@ -58,7 +58,7 @@ async def handle_message(message: Message):
         if response.status_code == 200:
             result = response.json()
             escaped_response = escape_markdown(result['response'])
-            await send_long_message(message, escaped_response, parse_mode=ParseMode.MARKDOWN_V2)
+            await send_long_message(message, escaped_response, parse_mode="MarkdownV2")
         else:
             error_text = escape_markdown("⚠️ Произошла ошибка при обработке запроса. Попробуйте позже.")
             await message.answer(error_text, parse_mode=ParseMode.MARKDOWN_V2)

@@ -2,7 +2,6 @@ import os
 from typing import Any, Dict
 
 from embedchain import App
-from embedchain.loaders.directory_loader import DirectoryLoader
 from embedchain.utils.misc import DataType
 
 from common.settings import settings
@@ -38,6 +37,11 @@ config = {
             "base_url": settings.OLLAMA_EMBEDDING_URL,
         },
     },
+    "chunker": {
+        "chunk_size": 1024,
+        "chunk_overlap": 128,
+        "length_function": "len"
+    }
 }
 
 print("Initializing RAG app...")
@@ -57,7 +61,7 @@ if os.path.exists(settings.DATA_DIR):
         print("В репозитории не найдено файлов с расширением .txt")
     else:
         mapping = {
-            "ai": "Искуственный интеллект",
+            "ai": "Искусственный интеллект",
             "ai_product": "Управление ИИ-продуктами / AI Product",
         }
         for fname in txt_files:
